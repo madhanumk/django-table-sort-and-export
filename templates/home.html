@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-sm-6 mt-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Table Sort & Export using datatables.net</h5>
+            <p class="card-text">Used: datatables.net javascript library</p>
+            <p>Note: If you have more than 3000 rows, avoid using datatables.net because the rendering process is too long (django template engine side).</p>
+            <a href="{% url 'student_list_using_datatables' %}" class="btn btn-primary">View Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mt-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Table Sort & Export using Django  </h5>
+            <p class="card-text"> Used: Dajngo pagination, python csv, order by query.</p>
+            <a href="{% url 'student_list' %}" class="btn btn-primary">View Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

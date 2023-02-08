@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load pagination_tags %}
+
+{% block content %}   
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-sm-2">    
+          
+        </div>
+
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Student List</h4>
+            </div>
+            <div class="col-sm-6">
+              <form method="get" action="{% url 'student_list' %}" target="_blank">
+                <input type="hidden" value="{{order}}" name="order"> <input type="hidden" value="{{field}}" name="order"> <input type="hidden" value="yes" name="export"> 
+                <button type="submit"  class="btn btn-dark float-end">Export as CSV</button>
+              </form>
+              
+            </div>
+          </div>
+          
+          
+
+          <table class="table table-striped table-bordered mt-2" id="example">
+              <thead>
+                <tr>
+                  
+                  <th><form method="get"><span class="span-inline">Name</span>  {% if field == "name" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Roll No</span>   {% if field == "roll_no" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="roll_no" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="roll_no" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="roll_no" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Gender</span> {% if field == "gender" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="gender" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="gender" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="gender" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Age </span> {% if field == "age" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="age" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="age" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="age" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Grade</span> {% if field == "grade__name" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="grade__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="grade__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="grade__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Section</span> {% if field == "section" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="section" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="section" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="section" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">State</span> {% if field == "state__name" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="state__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="state__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="state__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+                  <th><form method="get"><span class="span-inline">Country </span>{% if field == "state__country__name" %} {% if order == "ASC" %} <input type="hidden" value="DESC" name="order"> <input type="hidden" value="state__country__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-up-alt float-end"></i></button>  {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="state__country__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-sort-down float-end"></i>  </button> {% endif %} {% else %} <input type="hidden" value="ASC" name="order"> <input type="hidden" value="state__country__name" name="field"> <button class="border-none float-end" type="submit"><i class="bi bi-arrow-down-up "></i></button>  {% endif %}</form></th>
+
+                  </form>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for student in students %}
+                      <tr>
+                          <td>{{student.name}}</td>
+                          <td>{{student.roll_no}}</td>
+                          <td>{{student.get_gender_display}}</td>
+                          <td>{{student.age}}</td>
+                          <td>{{student.grade}}</td>
+                          <td>{{student.section}}</td>
+                          <td>{{student.state}}</td>
+                          <td>{{student.state.country}}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">          
+              {% if students.paginator.num_pages > 1 %}
+                <ul class="pagination justify-content-center">
+                    {% if students.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% param_replace page=1 %}">
+                                First
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">
+                                First
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if students.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% param_replace page=students.previous_page_number %}">
+                                &laquo;
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">
+                                &laquo;
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in students.paginator.page_range %}
+                        {% if students.number == i %}
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{ i }} <span class="sr-only"></span>
+                                </a>
+                            </li>
+                        {% elif students.number > i|add:"-5" and students.number < i|add:"+5"%}
+                            <li class="page-item"><a class="page-link" href="?{% param_replace page=i %}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if students.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% param_replace page=students.next_page_number %}">
+                                &raquo;
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">
+                                &raquo;
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if students.paginator.num_pages != students.number %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% param_replace page=students.paginator.num_pages %}">
+                                Last
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Last</a></li>
+                    {% endif %}
+                </ul>
+              {% endif %}
+            </nav>
+
+        </div>
+      
+    </div>
+  </div>
+{% endblock %}
